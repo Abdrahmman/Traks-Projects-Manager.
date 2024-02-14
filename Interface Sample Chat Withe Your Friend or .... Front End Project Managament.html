@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: calc(100% - 200px); /* عرض الشاشة - عرض القائمة الجانبية */
+            margin-left: 220px; /* إضافة مسافة عند اليسار تساوي عرض القائمة الجانبية + 20px */
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .contacts {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .contact {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .contact-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        .email {
+            color: #3498db;
+        }
+
+        .add-contact-btn {
+            margin-top: 20px;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 100%;
+            background-color: #3498db;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .user-name {
+            margin-bottom: 20px;
+        }
+
+        .menu-item {
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="user-name">John Doe</div>
+        <div class="menu">
+            <div class="menu-item">Projects</div>
+            <div class="menu-item">Account Settings</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 class="header">Contacts</h1>
+        <ul class="contacts" id="contacts-list">
+            <!-- Contacts will be added dynamically here -->
+        </ul>
+        <button class="add-contact-btn" onclick="addContact()">Add Contact</button>
+    </div>
+
+    <script>
+        // Function to add a new contact
+        function addContact() {
+            var contactName = prompt("Enter contact name:");
+            var contactEmail = prompt("Enter contact email:");
+            if (contactName !== null && contactName.trim() !== "" &&
+                contactEmail !== null && contactEmail.trim() !== "") {
+                var contactsList = document.getElementById("contacts-list");
+                var contactItem = document.createElement("li");
+                contactItem.classList.add("contact");
+                contactItem.innerHTML = `
+                    <div class="contact-name">${contactName}</div>
+                    <div class="email">${contactEmail}</div>
+                `;
+                contactsList.appendChild(contactItem);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: calc(100% - 200px); 
+            margin-left: 220px;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .projects {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .project {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .project-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        .settings-btn {
+            cursor: pointer;
+            float: right;
+            color: #777;
+        }
+
+        .settings-btn:hover {
+            color: #333;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 100%;
+            background-color: #3498db;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .user-name {
+            margin-bottom: 20px;
+        }
+
+        .menu-item {
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            text-decoration: underline;
+        }
+
+        button {
+            margin-left: 200px; /* تحريك الزر لليمين بمقدار عرض القائمة الجانبية */
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="user-name">John Doe</div>
+        <div class="menu">
+            <div class="menu-item">Friends</div>
+            <div class="menu-item">Account Settings</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 class="header">Projects</h1>
+        <ul class="projects" id="projects-list">
+            <!-- Projects will be added dynamically here -->
+        </ul>
+        <button onclick="addProject()">Add Project</button>
+    </div>
+
+    <script>
+        // Function to add a new project
+        function addProject() {
+            var projectName = prompt("Enter project name:");
+            if (projectName !== null && projectName.trim() !== "") {
+                var projectList = document.getElementById("projects-list");
+                var projectItem = document.createElement("li");
+                projectItem.classList.add("project");
+                projectItem.innerHTML = `
+                    <div class="project-title">${projectName}<span class="settings-btn" onclick="showSettings(this)">⋮</span></div>
+                `;
+                projectList.appendChild(projectItem);
+            }
+        }
+
+        // Function to show project settings
+        function showSettings(element) {
+            var projectTitle = element.parentElement.textContent;
+            var action = prompt(`Settings for project: ${projectTitle}\n1. Rename\n2. Delete`);
+            if (action === "1") {
+                var newName = prompt("Enter new name:");
+                if (newName !== null && newName.trim() !== "") {
+                    element.parentElement.textContent = newName;
+                }
+            } else if (action === "2") {
+                var confirmDelete = confirm("Are you sure you want to delete this project?");
+                if (confirmDelete) {
+                    element.parentElement.parentElement.remove();
+                }
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
